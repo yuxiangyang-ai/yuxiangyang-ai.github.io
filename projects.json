@@ -1,0 +1,146 @@
+[
+  {
+    "id": "multilingual-edge-omni-4b",
+    "category": "omni",
+    "title": "4B 海外多语言端侧 Omni 模型",
+    "company": "小鹏汽车",
+    "role": "核心训练 · 跨团队车端交付",
+    "date": "2026.02 - 至今",
+    "summary": "主责 4B 多语言 Omni 的 CPT、RL 与框架适配，推进量化优化和海外智能座舱交付。",
+    "tags": ["4B Omni", "多语言", "CPT / RL", "端侧量化"],
+    "highlights": [
+      { "value": "约 88%", "label": "SFT 模型离线完整工具调用准确率 · 中文业务集" },
+      { "value": "约 84%", "label": "SFT 模型离线完整工具调用准确率 · 英德法全量业务必过集宏平均" }
+    ],
+    "details": [
+      { "label": "模型研发", "text": "基于 AuT + Adapter + LLM，设计连接层对齐、联合训练与退火三阶段 CPT，结合教师蒸馏与分层学习率兼顾语音对齐和文本能力保持；主责 CPT、RL 训练及框架适配，协同 SFT 训练和数据管线。" },
+      { "label": "端侧适配", "text": "针对端侧时延与上下文约束，联合设计工具知识内化、领域词表扩充、上下文压缩与紧凑车控协议，压缩输入输出开销，兼顾业务效果与推理效率。" },
+      { "label": "量化部署", "text": "牵头引入已有量化部署工具链，负责新模型结构适配、业务数据采样及浮点至部署的精度优化，建立浮点、模拟量化与整数推理的分阶段对照；量化后模型效果较同浮点模型业务必过集降低约 2–3 个百分点，多语言 ASR 能力持平。" },
+      { "label": "交付成果", "text": "模型通过提测，上线巴黎车展海外智能座舱，支持中英德法 ASR 识别、语种识别、AQTA 端到端交互及语音车控、拒识等业务需求。" },
+      { "label": "评测与迭代", "text": "SFT 模型离线完整工具调用准确率：中文业务集约 88%，英德法全量业务必过集宏平均约 84%；后续扩展俄语、挪威语、阿拉伯语、丹麦语、希伯来语 ASR，并融合 ViT 开展视觉能力阶段全模态训练。" }
+    ]
+  },
+  {
+    "id": "audio-text-omni-30b",
+    "category": "omni",
+    "title": "30B 音频文本 Omni 继续预训练",
+    "company": "小鹏汽车",
+    "role": "继续预训练全流程主导",
+    "date": "",
+    "summary": "独立主导 30B MoE 音频文本 Omni 继续预训练，打通音频理解与生成训练链路。",
+    "tags": ["30B MoE", "音文统一建模", "ASR / TTS", "继续预训练"],
+    "highlights": [
+      { "value": "30B MoE", "label": "音频文本 Omni 继续预训练模型规模与架构" }
+    ],
+    "details": [
+      { "label": "统一建模", "text": "独立主导 30B MoE 音频文本 Omni 继续预训练，将离散音频 token 与文本 token 组织为统一序列，通过自回归建模支持语音识别、合成与音频问答任务。" },
+      { "label": "训练策略", "text": "设计音频词表冷启动、音文对齐与高质量退火的分阶段训练；结合 ASR / TTS 双向监督及词级音文交错，按 mask 后的有效 token 调整任务配比与损失权重；采用分层学习率控制不同层的更新幅度，配合文本回放，平衡音频适配速度与文本能力保持。" },
+      { "label": "阶段成果", "text": "打通音频理解与生成训练链路；Stage1 的 MMLU、CMMLU、CEVAL 评测均值接近开源文本基线，ASR、TTS 在后续阶段形成初步能力。" }
+    ]
+  },
+  {
+    "id": "cockpit-foundation-post-training",
+    "category": "training",
+    "title": "智能座舱文本基座模型后训练",
+    "company": "小鹏汽车",
+    "role": "核心研发",
+    "date": "2025.09 - 2026.01",
+    "summary": "独立构建多任务 RL 训练框架与奖励模块，支持 30B、235B MoE Instruct 模型交付。",
+    "tags": ["veRL / GSPO", "多任务 RL", "Megatron-Core", "30B / 235B MoE"],
+    "highlights": [
+      { "value": "约 +16 个百分点", "label": "30B 版本车载说明书 RAG · 较 Qwen3" },
+      { "value": "约 +8 个百分点", "label": "30B 版本车载 NLU · 较 Qwen3" }
+    ],
+    "details": [
+      { "label": "强化学习", "text": "基于 veRL 独立构建多任务 RL 训练框架与奖励模块，承接同组 SFT 模型，采用 GSPO 对齐；组合可验证规则与多维度 LLM-as-Judge，覆盖车载问答、RAG、工具调用、闲聊、安全及通用任务。" },
+      { "label": "训练支撑", "text": "基于 Megatron-Core 支持 MoE 训练与 EP / TP / PP 并行，解耦 rollout 与奖励计算；协同 Infra 完成 Ray-Megatron 蒸馏方案，分离教师推理与学生训练，支撑模型训练与交付。" },
+      { "label": "模型交付", "text": "交付 30B、235B MoE Instruct，30B 版本车载说明书 RAG、车载 NLU 较 Qwen3 分别提升约 16、8 个百分点；闲聊线上日志评测集平均分较线上三方 API 提升 4.8 个百分点。" }
+    ]
+  },
+  {
+    "id": "cockpit-foundation-pretraining",
+    "category": "training",
+    "title": "智能座舱文本基座模型预训练",
+    "company": "小鹏汽车",
+    "role": "核心研发",
+    "date": "2024.10 - 2025.09",
+    "summary": "开发跨词表蒸馏与多阶段 CPT 方案，完成多尺寸基座模型训练和车载领域能力增强。",
+    "tags": ["跨词表蒸馏", "Ray + Megatron", "词表扩充", "Dense / MoE"],
+    "highlights": [
+      { "value": "0.57 → 0.49", "label": "Car-RAG 输入 Token / Char · 约降低 14%" },
+      { "value": "200B + 40B", "label": "继续预训练数据量 · 高质量通用数据 + 领域数据" }
+    ],
+    "details": [
+      { "label": "基座训练", "text": "开发跨词表蒸馏预训练和多阶段训练方案，使用 top-k logits 蒸馏，保持通用能力同时增强车载领域能力，完成 200B 高质量通用数据和 40B 领域数据继续预训练。" },
+      { "label": "数据与词表", "text": "负责语料质量验证、筛选与领域配比实验，协同数据组迭代质量流程；主导车载 token 挖掘及词表扩充，车载领域（Car-RAG）输入 Token / Char 由 0.57 降至 0.49，约降低 14%。" },
+      { "label": "训练支撑", "text": "基于 Ray + Megatron 构建并优化 CPT 训练框架，在 H800 / PPU 完成多环境验证。" },
+      { "label": "模型交付", "text": "完成 7B、8B Dense、30B MoE 等多尺寸 Base 模型交付；30B MoE 通用能力平均掉点 0.5%，车载知识问答、媒体 POI 意图识别较开源基座分别提升 5%、9%。" }
+    ]
+  },
+  {
+    "id": "in-car-llm-agent",
+    "category": "speech",
+    "title": "基于 LLM 的车载 Agent 系统",
+    "company": "滴滴出行",
+    "role": "资深算法工程师",
+    "date": "2024.02 - 2024.07",
+    "summary": "参与车载 Chat Agent 核心研发，增强 RAG 与并行 Function Calling，并优化多轮响应延迟。",
+    "tags": ["Qwen1.5", "ReAct / RAG", "Function Calling", "vLLM"],
+    "highlights": [
+      { "value": "约 0.6 s", "label": "多卡部署下的多轮首 token 延迟" },
+      { "value": "+5%", "label": "Function Calling、文档问答准确性及输出合理性提升" }
+    ],
+    "details": [
+      { "label": "Agent 研发", "text": "参与 Qwen1.5 Chat Agent 流程设计与核心研发；基于 ReAct 构建 API 生成及多轮工具对话数据，结合混合检索、query decomposition 与 DeepSpeed 全量微调，增强 RAG 和并行 Function Calling。" },
+      { "label": "推理与部署", "text": "引入 self-reflection 与 token 概率回复选择，减少知识误用；基于 vLLM 与 pre-caching 多卡部署，多轮首 token 延迟约 0.6 s，Function Calling、文档问答准确性及输出合理性提升 5%。" }
+    ]
+  },
+  {
+    "id": "speech-text-multimodal-llm",
+    "category": "speech",
+    "title": "语音文本多模态 LLM 开发",
+    "company": "滴滴出行",
+    "role": "资深算法工程师",
+    "date": "2023.10 - 2023.12",
+    "summary": "参与语音文本多模态模型训练与评测，以实车数据验证端到端 SLU 的有效性。",
+    "tags": ["Whisper", "音频事件检测", "Projector 对齐", "端到端 SLU"],
+    "highlights": [],
+    "details": [
+      { "label": "模型研发", "text": "基于 Whisper 研究噪声鲁棒性与音频事件检测，参与中文继续预训练、projector 对齐及指令微调。" },
+      { "label": "数据与评测", "text": "构建 ASR、音频事件检测、描述与问答数据，完成音频事件分类及方言识别评测，并以实车数据验证端到端 SLU 的有效性。" }
+    ]
+  },
+  {
+    "id": "speech-semantic-rejection-context-rewrite",
+    "category": "speech",
+    "title": "语音语义联合拒识 / 多轮上下文改写",
+    "company": "滴滴出行",
+    "role": "资深算法工程师",
+    "date": "2022.07 - 2023.06",
+    "summary": "负责全双工语音语义拒识并完成四次迭代，构建和上线车载多轮上下文改写模型。",
+    "tags": ["全双工拒识", "Attention / BERT", "UNet", "上下文改写"],
+    "highlights": [
+      { "value": "93.7%", "label": "全双工语音语义拒识 · 交付精度" },
+      { "value": "96%", "label": "全双工语音语义拒识 · 交付召回率" }
+    ],
+    "details": [
+      { "label": "联合拒识", "text": "负责全双工语音语义拒识，基于 Attention 融合音频与文本 embedding，结合 BERT 分类及多轮策略完成四次迭代；交付精度 93.7%、召回率 96%，实车对比测试优于竞品。" },
+      { "label": "上下文改写", "text": "构建车载多轮改写数据集，采用 BERT + UNet 多任务模型，并以 mT5-base 探索生成式改写优化；上下文改写模型上线准确率 92.5%。" }
+    ]
+  },
+  {
+    "id": "dialogue-management-rule-engine",
+    "category": "speech",
+    "title": "对话管理规则引擎 · MONA M03 已面市",
+    "company": "滴滴出行",
+    "role": "资深算法工程师",
+    "date": "2022.02 - 2024.09",
+    "summary": "参与云端 NLP 对话管理模块从零到一建设，支撑车载垂域需求迭代与车型交付。",
+    "tags": ["对话管理", "规则引擎", "多轮交互", "MONA M03"],
+    "highlights": [],
+    "details": [
+      { "label": "模块建设", "text": "参与云端 NLP 对话管理模块从零到一建设，负责方案选型与组件研发。" },
+      { "label": "能力与交付", "text": "实现继承填槽、多轮追问、意图切换、判不停与指令排序，支撑音乐、导航等垂域需求迭代与车型交付；项目关联车型 MONA M03 已面市。" }
+    ]
+  }
+]
